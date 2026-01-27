@@ -1,6 +1,7 @@
 import 'dotenv/config';
 import fetch from 'node-fetch';
 import express from 'express';
+import puppeteer from "puppeteer";
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -105,6 +106,37 @@ app.get("/api/top-tracks", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch top artists" });
   }
 });
+
+app.get("/api/refresh-ui", async (req, res) => {
+  try {
+    await captureUIScreenshot();
+    res.json({ success: true, message: "UI update triggered" });
+  } catch (err) {
+    res.status(500).json({ error: "UI update failed" });
+  }
+});
+
+async function captureUIScreenshot() {
+
+  const browser = await puppeteer.launch({
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    executablePath: '/usr/bin/chromium-browser'
+  });
+
+  const page = await browser.newPage();
+
+  await page.setViewport({ width: 480, height: 800 });
+
+  await page.goto(`http://localhost:${PORT}`, { waitUntil: "networkidle0" });
+
+await page.waitForSelector(".artist-card", { timeout: 5000 }).catch(() => {
+  console.log("Cards didn't load in time, taking screenshot anyway...");
+});
+
+await page.screenshot({ path: "screenshot.png" });
+  await browser.close();
+  console.log("Screenshot saved.");
+}
 
 // Start server
 app.listen(PORT, () => {

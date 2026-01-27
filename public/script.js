@@ -34,13 +34,13 @@ async function updateScreen() {
       <div class="errorCard">
       <img src="errorIcon.png" alt="error" class="errorIcon" width=125px height=125px
       <p class="errorText">${`Error fetching API data`}</p>
-      </div>`
+      </div>`,
     );
 
     throw new Error(
       `Spotify API Error: ${resTracks.status} - ${
         errorBody.error?.message || resTracks.statusText
-      }`
+      }`,
     );
   }
   const topTracks = await resTracks.json();
