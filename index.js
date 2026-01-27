@@ -120,7 +120,7 @@ async function captureUIScreenshot() {
 
   const browser = await puppeteer.launch({
     args: ["--no-sandbox", "--disable-setuid-sandbox"],
-    executablePath: '/usr/bin/chromium-browser'
+    executablePath: '/usr/bin/chromium'
   });
 
   const page = await browser.newPage();
