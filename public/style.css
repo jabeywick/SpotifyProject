@@ -1,0 +1,88 @@
+body {
+  font-family: "Jost", sans-serif;
+  background-color: #FFFFFF;
+  color: #000000;
+  overflow: hidden;
+}
+
+#artistList, #songList {
+  display: block;
+  padding-left: 20px;
+  margin-top: 0;
+}
+
+#artistList li , #songList li {
+  list-style-type: none;
+  margin: 5px;
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+}
+
+.artist-card {
+  display: flex;
+  align-items: center; 
+  padding-bottom: 22px;
+}
+
+.artist-card p {
+  margin: 5px 0 0;
+  white-space: nowrap; 
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: block;
+  width: 100%;
+}
+
+.artist-card img {
+  flex-shrink: 0;
+  border: 1px solid #EEEEEE;
+}
+
+.textOnCard {
+  padding-left: 10px;
+  display: block;
+  align-items:center;
+  font-size: 25px;
+  overflow: hidden;
+  min-width: 0
+}
+
+.songName {
+  font-weight: 550;
+}
+
+.songArtist {
+  font-size: 20px;
+  color: #444444;
+}
+
+.headerWithIcon{
+  display: flex;
+  margin-bottom: 0;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  padding-left: 17px;
+  align-items: center;
+  margin-top: 20px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-size: 1.9em;
+}
+
+.headerIcon{
+    width: 60px;
+  height: 60px;
+  padding-right: 5px;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.errorCard{
+  display: flex;
+  margin-top: 100px;
+  flex-direction: column;
+  align-items: center;
+  font-size: 30px;
+}
