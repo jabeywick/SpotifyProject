@@ -116,8 +116,6 @@ app.get("/api/refresh-ui", async (req, res) => {
   }
 });
 
-const { exec } = require("child_process");
-
 async function captureUIScreenshot() {
 
   const browser = await puppeteer.launch({
@@ -138,14 +136,6 @@ await page.waitForSelector(".artist-card", { timeout: 5000 }).catch(() => {
 await page.screenshot({ path: "screenshot.png" });
   await browser.close();
   console.log("Screenshot saved.");
-
-  exec("python3 displayDriver.py", (error) => {
-    if (error) {
-      console.error(`Error: ${error.message}`);
-      return;
-    }
-    console.log("Display updated");
-  });
 }
 
 // Start server
