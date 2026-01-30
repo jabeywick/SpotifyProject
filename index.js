@@ -116,7 +116,7 @@ app.get("/api/refresh-ui", async (req, res) => {
   }
 });
 
-const { exec } = require("child_process");
+import { exec } from "child_process";
 
 async function captureUIScreenshot() {
 
