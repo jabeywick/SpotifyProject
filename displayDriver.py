@@ -1,12 +1,18 @@
-from PIL import Image
+from PIL import Image, ImageEnhance
 from inky.auto import auto
 
 # Initialise display
 inky_display = auto()
-resolution = inky_display.resolution
 
 # Open and show screenshot
 image = Image.open("screenshot.png")
-image = image.resize(resolution)
-inky_display.set_image(image, saturation=0.5)
+image = image.rotate(90, expand=True)
+
+converter = ImageEnhance.Color(image)
+image = converter.enhance(2.0)
+
+contrast = ImageEnhance.Contrast(image)
+image = converter.enhance(1.2)
+
+inky_display.set_image(image)
 inky_display.show()
