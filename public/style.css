@@ -58,12 +58,11 @@ body {
 
 .headerWithIcon{
   display: flex;
-  margin-bottom: 0;
-  padding-bottom: 20px;
-  padding-top: 20px;
+  margin: 0;
+  padding-bottom: 25px;
+  padding-top: 25px;
   padding-left: 17px;
   align-items: center;
-  margin-top: 20px;
   font-weight: 700;
   letter-spacing: 1px;
   font-size: 1.9em;
@@ -87,4 +86,9 @@ body {
   flex-direction: column;
   align-items: center;
   font-size: 30px;
+}
+
+.albumArt{
+  filter: saturate(180%) contrast(120%) brightness(110%);
+  image-rendering: pixelated;
 }

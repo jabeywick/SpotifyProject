@@ -1,24 +1,5 @@
 async function updateScreen() {
-  // const res = await fetch("/api/top-artists");
-  // const topArtists = await res.json();
-  // console.log(topArtists);
-
   const widthAndHeight = "105px";
-
-  // const list = document.getElementById("artistList");
-  // list.innerHTML = "";
-
-  // topArtists?.forEach((element) => {
-  //   const li = document.createElement("li");
-  //   li.innerHTML = `<div class="artist-card">
-  //     <img src=${element.images?.[0]?.url} width=${widthAndHeight} height=${widthAndHeight}></img>
-  //     <div class="textOnCard">
-  //     <p>${element.name}</p>
-  //     </div>
-  //   </div>`;
-
-  //   list.appendChild(li);
-  // });
 
   const resTracks = await fetch("/api/top-tracks");
   const songList = document.getElementById("songList");
@@ -49,7 +30,7 @@ async function updateScreen() {
   topTracks?.forEach((element) => {
     const li = document.createElement("li");
     li.innerHTML = `<div class="artist-card">
-      <img src=${element.album?.images?.[0]?.url} width=${widthAndHeight} height=${widthAndHeight}></img>
+      <img src=${element.album?.images?.[0]?.url} width=${widthAndHeight} height=${widthAndHeight} class= "albumArt"></img>
       <div class="textOnCard">
       <p class="songName">${element.name}</p>
       <p class="songArtist">${element.artists?.[0]?.name}</p>
