@@ -73,6 +73,8 @@ body {
     width: 60px;
   height: 60px;
   padding-right: 5px;
+  color: #00ff00;
+  filter: saturate(200%) contrast(150%);
 }
 
 ::-webkit-scrollbar {
