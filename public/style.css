@@ -89,6 +89,6 @@ body {
 }
 
 .albumArt{
-  filter: saturate(180%) contrast(120%) brightness(110%);
+  filter: saturate(140%) contrast(120%) brightness(110%);
   image-rendering: pixelated;
 }

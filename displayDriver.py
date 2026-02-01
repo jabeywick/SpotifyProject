@@ -1,4 +1,4 @@
-from PIL import Image, ImageEnhance
+from PIL import Image, ImageEnhance, ImageOps
 from inky.auto import auto
 
 # Initialise display
@@ -13,6 +13,9 @@ image = converter.enhance(2.0)
 
 contrast = ImageEnhance.Contrast(image)
 image = converter.enhance(1.2)
+
+# Limit colors to be handled on eink display better
+image = ImageOps.posterize(image, bits=4)
 
 inky_display.set_image(image)
 inky_display.show()
