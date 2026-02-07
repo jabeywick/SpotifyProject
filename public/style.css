@@ -3,8 +3,6 @@ body {
   background-color: #FFFFFF;
   color: #000000;
   overflow: hidden;
-  width: 600px;
-  height: 400px;
 }
 
 #artistList, #songList {
