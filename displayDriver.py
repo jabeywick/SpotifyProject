@@ -5,7 +5,7 @@ from inky.auto import auto
 # Initialise display
 inky_display = auto()
 
-background = Image.new('RGB', (inky_display.width, inky_display.height), (255, 255, 255))
+background = Image.new('RGB', (WIDTH, HEIGHT), (255, 255, 255))
 
 offset_x = (inky_display.width - background.width) // 2
 offset_y = (inky_display.height - background.height) // 2
