@@ -125,7 +125,7 @@ async function captureUIScreenshot() {
 
   const page = await browser.newPage();
 
-  await page.setViewport({ width: 480, height: 800 });
+  await page.setViewport({ width: 400, height: 600 });
 
   await page.goto(`http://localhost:${PORT}`, { waitUntil: "networkidle0" });
 
