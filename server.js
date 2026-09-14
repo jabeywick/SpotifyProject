@@ -4,7 +4,26 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const HISTORY_FILE = path.join(__dirname, 'rank_history.json');
+
+// Detect if running as root and use appropriate path
+function getHistoryFilePath() {
+  const uid = process.getuid?.() || null;
+  
+  if (uid === 0) {
+    // Running via cron, use home directory
+    const homeDir = process.env.HOME || '/root';
+    const filePath = path.join(homeDir, '.spotify_rank_history.json');
+    console.log(`[TRENDS] Running as root, using: ${filePath}`);
+    return filePath;
+  } else {
+    // Else use project directory
+    const filePath = path.join(__dirname, 'rank_history.json');
+    console.log(`[TRENDS] Running as user ${uid}, using: ${filePath}`);
+    return filePath;
+  }
+}
+
+const HISTORY_FILE = getHistoryFilePath();
 
 function getRankHistory() {
   console.log(`[TRENDS] Resolved history file path: ${HISTORY_FILE}`);
