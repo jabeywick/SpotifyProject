@@ -1,6 +1,10 @@
 import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
-const HISTORY_FILE = 'rank_history.json';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const HISTORY_FILE = path.join(__dirname, 'rank_history.json');
 
 function getRankHistory() {
   if (!fs.existsSync(HISTORY_FILE)) return {};
