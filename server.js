@@ -1,6 +1,6 @@
 import fs from 'fs';
 
-const HISTORY_FILE = './rank_history.json';
+const HISTORY_FILE = 'rank_history.json';
 
 function getRankHistory() {
   if (!fs.existsSync(HISTORY_FILE)) return {};
