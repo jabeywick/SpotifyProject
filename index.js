@@ -2,6 +2,7 @@ import 'dotenv/config';
 import fetch from 'node-fetch';
 import express from 'express';
 import puppeteer from "puppeteer";
+import {processTrends} from './server.js';
 
 const app = express();
 const PORT = process.env.PORT || 8080;
@@ -55,7 +56,8 @@ async function getAccessToken() {
   }
 
   console.log('Refreshing access token');
-
+console.log("Client ID loaded:", process.env.SPOTIFY_CLIENT_ID ? "YES" : "NO (undefined)");
+console.log("Client Secret loaded:", process.env.SPOTIFY_CLIENT_SECRET ? "YES" : "NO (undefined)");
   const credentials = Buffer.from(
     `${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`
   ).toString('base64');
@@ -100,10 +102,10 @@ app.get("/api/top-tracks", async (req, res) => {
     const token = await getAccessToken();
     console.log("Access token acquired");
     const tracks = await getTopTracks(token);
-    res.json(tracks);
+    res.json(processTrends('tracks', tracks));
   } catch (err) {
     console.error(err);
-    res.status(500).json({ error: "Failed to fetch top artists" });
+    res.status(500).json({ error: "Failed to fetch top tracks" });
   }
 });
 

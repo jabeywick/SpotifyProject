@@ -29,11 +29,15 @@ async function updateScreen() {
 
   topTracks?.forEach((element) => {
     const li = document.createElement("li");
+
     li.innerHTML = `<div class="artist-card">
       <img src=${element.album?.images?.[0]?.url} width=${widthAndHeight} height=${widthAndHeight} class= "albumArt"></img>
       <div class="textOnCard">
       <p class="songName">${element.name}</p>
-      <p class="songArtist">${element.artists?.[0]?.name}</p>
+      <p class="songArtist">
+      ${element.artists?.[0]?.name}
+      <span class="trend-indicator-${element.trend?.status}">${element.trend?.symbol}</span>
+      </p>
       </div>
     </div>`;
 

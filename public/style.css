@@ -56,6 +56,26 @@ body {
   color: #444444;
 }
 
+.trend-indicator-up {
+  color: #08f008f1;
+  font-weight: bold;
+}
+
+.trend-indicator-down {
+  color: #f30808;
+  font-weight: bold;
+}
+
+.trend-indicator-same {
+  color: #49595c;
+  font-weight: bold;
+}
+
+.trend-indicator-new {
+  color: #0440f5;
+  font-weight: bold;
+}
+
 .headerWithIcon{
   display: flex;
   margin: 0;
