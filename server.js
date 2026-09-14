@@ -7,15 +7,30 @@ const __dirname = path.dirname(__filename);
 const HISTORY_FILE = path.join(__dirname, 'rank_history.json');
 
 function getRankHistory() {
-  if (!fs.existsSync(HISTORY_FILE)) return {};
+  console.log(`[TRENDS] Resolved history file path: ${HISTORY_FILE}`);
+  if (!fs.existsSync(HISTORY_FILE)) {
+    console.log(`[TRENDS] No existing history file found at path.`);
+    return {};
+  }
   try {
-    return JSON.parse(fs.readFileSync(HISTORY_FILE, 'utf-8'));
-  } catch {
+    const rawData = fs.readFileSync(HISTORY_FILE, 'utf-8');
+    console.log(`[TRENDS] Successfully read history file contents.`);
+    return JSON.parse(rawData);
+  } catch (err) {
+    console.error(`[TRENDS ERROR] Failed to parse history JSON:`, err.message);
     return {};
   }
 }
 
 export function processTrends(categoryKey, items) {
+  console.log(`[TRENDS] processTrends called for category: "${categoryKey}"`);
+
+  if (!Array.isArray(items)) {
+    console.error(`[TRENDS ERROR] 'items' is not an array. Value received:`, items);
+    return items;
+  }
+
+  console.log(`[TRENDS] Processing ${items.length} items for "${categoryKey}"...`);
   const history = getRankHistory();
   const previousRanks = history[categoryKey] || {};
   const currentRanks = {};
@@ -25,7 +40,7 @@ export function processTrends(categoryKey, items) {
     currentRanks[item.id] = currentRank;
     const previousRank = previousRanks[item.id];
 
-    let trendSymbol = '[ NEW ]'; // New entry
+    let trendSymbol = '[ NEW ]';
     let trendStatus = 'new';
 
     if (previousRank !== undefined) {
@@ -51,9 +66,14 @@ export function processTrends(categoryKey, items) {
     };
   });
 
-  // Save current positions for future comparison
   history[categoryKey] = currentRanks;
-  fs.writeFileSync(HISTORY_FILE, JSON.stringify(history, null, 2));
+
+  try {
+    fs.writeFileSync(HISTORY_FILE, JSON.stringify(history, null, 2));
+    console.log(`[TRENDS SUCCESS] Successfully wrote rank data to: ${HISTORY_FILE}`);
+  } catch (err) {
+    console.error(`[TRENDS ERROR] Failed to write file to disk:`, err.message);
+  }
 
   return itemsWithTrends;
 }
